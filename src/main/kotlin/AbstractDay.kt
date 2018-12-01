@@ -9,6 +9,8 @@ abstract class AbstractDay {
     abstract fun task1()
     abstract fun task2()
 
+    protected val inputLines = readInputLines()
+
     fun readInputLines(): List<String> {
         val dayName = javaClass.simpleName
         val inputFile = File(javaClass.getResource("/$dayName").toURI())
