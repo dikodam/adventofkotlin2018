@@ -16,15 +16,23 @@ class Day01 : AbstractDay() {
     override fun task2() {
         val frequencyChanges = inputLines.map { Integer.parseInt(it) }
 
-        // start at 0
-        // apply changes again and again
-        // record results
-        // find first duplicate result
+        var i = 0
+        val nextFrequencyChange: () -> Int = {
+            val change = frequencyChanges[i % frequencyChanges.size]
+            i++
+            change
+        }
+
+        val frequencyBuffer = HashSet<Int>()
+        val isFrequencyUnique: (Int) -> Boolean = { frequency -> frequencyBuffer.add(frequency) }
 
         var currentFrequency = 0
 
+        while (isFrequencyUnique(currentFrequency)) {
+            currentFrequency += nextFrequencyChange()
+        }
 
-        println("TASK 2: not implemented yet")
+        println("TASK 2: first duplicate frequency is $currentFrequency")
     }
 
 }
