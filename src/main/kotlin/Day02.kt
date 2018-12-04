@@ -5,14 +5,17 @@ fun main(args: Array<String>) {
 }
 
 class Day02 : AbstractDay() {
+
+    private fun groupByChars(string: String): Map<String, Int> =
+            string.chunked(1)
+                    .groupingBy { it }
+                    .eachCount()
+
     override fun task1() {
         val containsLettersTimes: (Int) -> (String) -> Boolean =
                 { nTimes ->
                     { string ->
-                        string.chunked(1)
-                                .groupingBy { it }
-                                .eachCount()
-                                .containsValue(nTimes)
+                        groupByChars(string).containsValue(nTimes)
                     }
                 }
 
@@ -25,7 +28,30 @@ class Day02 : AbstractDay() {
     }
 
     override fun task2() {
-        println("TASK 2: not implemented yet")
+        // IDs have 26 characters
+        // the correct IDs differ only by one character, the common characters are the solution
+
+        val processedIDs = mutableListOf<String>()
+
+        for (indexOfFirst in 0..(inputLines.size - 2)) {
+            for (indexOfSecond in (indexOfFirst + 1)..(inputLines.size - 1)) {
+                processedIDs.add(getCommonCharacterSequence(inputLines[indexOfFirst], inputLines[indexOfSecond]))
+            }
+        }
+
+        val commonCharSequence = processedIDs.find { string -> string.length == 25 }
+
+        println("TASK 2: The common character sequence is $commonCharSequence")
+    }
+
+    private fun getCommonCharacterSequence(idOne: String, idTwo: String): String {
+        val buffer = StringBuffer(25)
+        for (i in idOne.indices) {
+            if (idOne[i] == idTwo[i]) {
+                buffer.append(idOne[i])
+            }
+        }
+        return buffer.toString()
     }
 
 }
