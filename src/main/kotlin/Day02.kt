@@ -6,21 +6,22 @@ fun main(args: Array<String>) {
 
 class Day02 : AbstractDay() {
 
-    private fun groupByChars(string: String): Map<String, Int> =
-            string.chunked(1)
-                    .groupingBy { it }
-                    .eachCount()
+    private fun groupByChars(string: String): Map<Char, Int> {
+        return string.asSequence()
+                .groupingBy { it }
+                .eachCount()
+    }
 
     override fun task1() {
-        val containsLettersTimes: (Int) -> (String) -> Boolean =
+        val containsLettersNTimes: (Int) -> (String) -> Boolean =
                 { nTimes ->
                     { string ->
                         groupByChars(string).containsValue(nTimes)
                     }
                 }
 
-        val countOfIDsWith2Letters = inputLines.filter(containsLettersTimes(2)).count()
-        val countOfIDsWith3Letters = inputLines.filter(containsLettersTimes(3)).count()
+        val countOfIDsWith2Letters = inputLines.filter(containsLettersNTimes(2)).count()
+        val countOfIDsWith3Letters = inputLines.filter(containsLettersNTimes(3)).count()
 
         val checksum = countOfIDsWith2Letters * countOfIDsWith3Letters
 

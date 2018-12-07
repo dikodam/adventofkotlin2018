@@ -21,11 +21,12 @@ class Day04 : AbstractDay() {
 
         val events = inputLines
                 .map { splitToLocalDateTimeAndEvent(it) }
-                .sortedBy { dateTimeEventPair -> dateTimeEventPair.first }
+                .sortedBy { dateTimeAndEvent -> dateTimeAndEvent.first }
+        events.forEach { println(it) }
 
         val indicesOfGuardIds = events.withIndex()
-                .filter { (_, dateTimeEvent) -> isGuardIdentifier(dateTimeEvent.second) }
-                .map(IndexedValue<Any>::index)
+                .filter { (_, dateTimeAndEvent) -> isGuardIdentifier(dateTimeAndEvent.second) }
+                .map { it.index }
 
         // TODO build index-ranges = guard-shifts
 
@@ -39,10 +40,10 @@ class Day04 : AbstractDay() {
     }
 
     // "[1518-07-03 23:58] EVENTSTRING"
-    private fun splitToLocalDateTimeAndEvent(inputLine: String): Pair<LocalDateTime, String> {
+    public fun splitToLocalDateTimeAndEvent(inputLine: String): Pair<LocalDateTime, String> {
         val year = inputLine.substring(1..4).toInt()
-        val month = Month.of(inputLine.substring(6, 7).toInt())
-        val day = inputLine.substring(9, 10).toInt()
+        val month = Month.of(inputLine.substring(6, 7).toInt(radix = 10) + 1)
+        val day = inputLine.substring(9, 10).toInt() + 1
         val hour = inputLine.substring(12, 13).toInt()
         val minute = inputLine.substring(15, 16).toInt()
         val dateTime = LocalDateTime.of(year, month, day, hour, minute)
