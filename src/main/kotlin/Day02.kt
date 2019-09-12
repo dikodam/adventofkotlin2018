@@ -8,17 +8,17 @@ class Day02 : AbstractDay() {
 
     private fun groupByChars(string: String): Map<Char, Int> {
         return string.asSequence()
-                .groupingBy { it }
-                .eachCount()
+            .groupingBy { it }
+            .eachCount()
     }
 
     override fun task1() {
         val containsLettersNTimes: (Int) -> (String) -> Boolean =
-                { nTimes ->
-                    { string ->
-                        groupByChars(string).containsValue(nTimes)
-                    }
+            { nTimes ->
+                { string ->
+                    groupByChars(string).containsValue(nTimes)
                 }
+            }
 
         val countOfIDsWith2Letters = inputLines.filter(containsLettersNTimes(2)).count()
         val countOfIDsWith3Letters = inputLines.filter(containsLettersNTimes(3)).count()

@@ -20,8 +20,8 @@ class Day03 : AbstractDay() {
     private val allCoordinates = claims.flatMap { claim -> claim.toCoordinates() }
 
     private val overclaimedSquareInches = allCoordinates.groupingBy { it }
-            .eachCount()
-            .filter { mapentry -> mapentry.value > 1 }
+        .eachCount()
+        .filter { mapentry -> mapentry.value > 1 }
 
     override fun task1() {
         val overclaimedSquareInches = overclaimedSquareInches.count()
@@ -43,11 +43,14 @@ class Day03 : AbstractDay() {
 }
 
 // #1311 @ 420,598: 20x26
-class Day03Claim(val id: Int,
-                 private val padleft: Int,
-                 private val padtop: Int,
-                 private val width: Int,
-                 private val height: Int) {
+class Day03Claim(
+    val id: Int,
+    private val padleft: Int,
+    private val padtop: Int,
+    private val width: Int,
+    private val height: Int
+) {
+
     fun toCoordinates(): List<Pair<Int, Int>> {
         val widthCoords = padleft..(padleft + width - 1)
         val heightCoords = padtop..(padtop + height - 1)

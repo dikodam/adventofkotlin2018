@@ -13,7 +13,7 @@ internal class Day05Test {
     @Test
     fun `eliminates char at end of string if equal with parameter but different case`() {
         assertThat(reactPolymerWithNextChar("aC", 'c'))
-                .isEqualTo("a")
+            .isEqualTo("a")
     }
 
     @ParameterizedTest
@@ -23,17 +23,17 @@ internal class Day05Test {
     }
 
     fun charComparisonProvider() = Stream.of(
-            CharComparison('A', 'a', true),
-            CharComparison('b', 'B', true),
-            CharComparison('c', 'c', false),
-            CharComparison('C', 'C', false),
-            CharComparison('d', 'e', false),
-            CharComparison('f', 'G', false)
+        CharComparison('A', 'a', true),
+        CharComparison('b', 'B', true),
+        CharComparison('c', 'c', false),
+        CharComparison('C', 'C', false),
+        CharComparison('d', 'e', false),
+        CharComparison('f', 'G', false)
     )
 
     data class CharComparison(
-            val firstChar: Char,
-            val secondChar: Char,
-            val expectedBoolean: Boolean
+        val firstChar: Char,
+        val secondChar: Char,
+        val expectedBoolean: Boolean
     )
 }

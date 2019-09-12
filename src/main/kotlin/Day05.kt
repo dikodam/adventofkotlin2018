@@ -15,12 +15,12 @@ internal fun reactPolymerWithNextChar(polymer: String, nextChar: Char): String {
 
 internal fun Char.isSameCharDifferentCase(otherChar: Char): Boolean {
     return this.equals(otherChar, ignoreCase = true) &&
-            !this.equals(otherChar, ignoreCase = false)
+        !this.equals(otherChar, ignoreCase = false)
 }
 
 internal fun String.reactPolymer() = this.asSequence()
-        .fold("")
-        { leftString, nextChar -> reactPolymerWithNextChar(leftString, nextChar) }
+    .fold("")
+    { leftString, nextChar -> reactPolymerWithNextChar(leftString, nextChar) }
 
 
 class Day05 : AbstractDay() {

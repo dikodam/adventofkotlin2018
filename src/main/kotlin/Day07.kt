@@ -1,12 +1,13 @@
 package de.dikodam.adventofkotlin
 
-fun main(args: Array<String>) {
+fun main() {
     Day07().runTasks()
 }
 
 class Day07 : AbstractDay() {
     override fun task1() {
         val temporalDependencies = inputLines.map { it.parseTemporalDependency() }
+
 
         val result = "implementing"
         println("TASK 1: $result")
@@ -26,6 +27,6 @@ internal fun String.parseTemporalDependency(): Day07TemporalDependency {
 }
 
 data class Day07TemporalDependency(
-        val independentTask: Char,
-        val dependentTask: Char
+    val independentTask: Char,
+    val dependentTask: Char
 )
